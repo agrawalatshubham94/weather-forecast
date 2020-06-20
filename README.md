@@ -12,3 +12,7 @@ As this is a free version of the API, there are some limitation as listed below,
 2. Account API Keys (Max) - 1
 3. Uptime - 95%
 Detailed information can be viewed at https://www.weatherbit.io/pricing
+
+## Demo: Working component
+
+Working component can be viewed at 	https://sdml-shubham-developer-edition.ap5.force.com/customers/s/weather-forecast
