@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Daily Forcasts</label>
+    <protected>false</protected>
+    <values>
+        <field>API_Key__c</field>
+        <value xsi:type="xsd:string">6a5721fb0f7b4830880fddd28bb0f5c8</value>
+    </values>
+    <values>
+        <field>Base_URL__c</field>
+        <value xsi:type="xsd:string">https://api.weatherbit.io</value>
+    </values>
+    <values>
+        <field>Endpoint__c</field>
+        <value xsi:type="xsd:string">/v2.0/forecast/daily</value>
+    </values>
+</CustomMetadata>

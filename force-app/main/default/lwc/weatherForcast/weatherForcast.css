@@ -1,0 +1,54 @@
+.container {
+    text-align: center;
+	left: 0;
+    right: 0;
+    height: 100%;
+    font-weight: 300;
+}
+
+.container .location {
+    font-size: 1.5rem;
+	text-transform: uppercase;
+}
+
+.container .temperature {
+    font-size: 3.5rem;
+}
+
+.container .description {
+  	text-transform: uppercase;
+    margin: 0.5rem 0 0 0;
+}
+
+.container .right-align {
+    text-align: right;
+}
+
+.container .left-align {
+    text-align: left;
+}
+
+.container .subtle {
+    color: #999999;
+}
+
+.container .deg:not(:empty):after {
+    content: '°';
+}
+
+.container .message {
+    font-size: 1.3rem;
+    color: #555555;
+    padding-bottom: 3rem;
+}
+
+.container .message:empty {
+	display:none;
+}
+
+.container .api-logo {
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 15px;
+    color: #0089bc;
+}

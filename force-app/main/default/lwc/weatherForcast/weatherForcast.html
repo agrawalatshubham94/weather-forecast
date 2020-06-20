@@ -1,0 +1,87 @@
+<!-- 
+****************************************************************************************************** 
+* Name               : weatherForcast                                                                               
+* Author SFDC        : Shubham Agrawal                                                
+* Version            : 1.0                                                                                                                  
+* Function           : Component to render weather forcast
+****************************************************************************************************** 
+* Change History    AUTHOR            	DATE                            Description                          
+* CH00              Shubham Agrawal     20-Jun-2020                  	created the Component
+****************************************************************************************************** 
+-->
+<template>
+    <div class="main_container">
+        <lightning-card title="Weather Forecast" class="slds-is-relative">
+            
+            <!--Change location button to dynamically render/unrender user input field to search for new location-->
+            <template if:true={changeLocation.show}>
+                <lightning-button label="Cancel" slot="actions" onclick={handleCancelOnclick}></lightning-button>
+            </template>
+            <template if:false={changeLocation.show}>
+                <lightning-button label="Change Location" slot="actions" onclick={handleChangeLocationOnclick}></lightning-button>
+            </template>            
+            
+            <!--Main content body of the component start-->
+            <div class="container">
+                <template if:true={message}>
+                    <div class="message">{message}</div>
+                </template>
+
+                <!--renders user input field to change the location-->
+                <template if:true={changeLocation.show}>
+                    <lightning-layout multiple-rows horizontal-align="center">
+                        <lightning-layout-item>
+                            <lightning-input type="text" label="City Name" placeholder="City Name,Country Name" variant="label-hidden" onchange={handleCityChange}>                                
+                            </lightning-input>
+                        </lightning-layout-item>
+                        <lightning-layout-item>
+                            <lightning-button label="Set Location" variant="brand" onclick={handleSetLocationOnclick} disabled={changeLocation.button_disabled}>                                
+                            </lightning-button>
+                        </lightning-layout-item>
+                        <lightning-layout-item padding="around-medium" size="12" class="slds-text-longform left-align">
+                            Possible searches,
+                            <ul>
+                                <li>London</li>
+                                <li>London,UK</li>
+                                <li>New Yourk,US</li>
+                            </ul>
+                            Hint: More accurate input yields more accurate response.
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+
+                <!--renders weather forcast content based on geolocation or user input-->
+                <template if:false={changeLocation.show}>
+                    <template if:true={data}>
+                        <lightning-layout multiple-rows>
+                            <template iterator:it={data.data}>
+                                <lightning-layout-item size="12" if:true={it.first} class="list-first" key={it.value.datetime}>
+                                    <img src={it.value.weather.icon}></img>
+                                    <div class="location">{data.city_name}, {data.country_code}</div>
+                                    <div class="description">{it.value.weather.description}</div>
+                                    <div class="temperature deg">{it.value.temp}</div>
+                                </lightning-layout-item>
+                                <lightning-layout-item size="12" if:false={it.first} key={it.value.datetime} class="slds-p-left_medium slds-p-right_medium">
+                                    <lightning-layout multiple-rows horizontal-align="space" vertical-align="center">
+                                        <lightning-layout-item size="2" class="left-align">{it.value.valid_day}</lightning-layout-item>
+                                        <lightning-layout-item size="2"><img src={it.value.weather.icon} style="height:2rem;"></img></lightning-layout-item>
+                                        <lightning-layout-item size="4">{it.value.weather.description}</lightning-layout-item>
+                                        <lightning-layout-item size="2" class="deg">{it.value.max_temp}</lightning-layout-item>
+                                        <lightning-layout-item size="2" class="deg">{it.value.min_temp}</lightning-layout-item>
+                                    </lightning-layout>
+                                </lightning-layout-item>
+                            </template>
+                        </lightning-layout> 
+                        <div class="slds-p-top_x-large"><a href={api_home} target="_blank" class="api-logo">Weatherbit.io</a></div>               
+                    </template>        
+                </template>
+            </div>
+            <!--Main content body of the component ends-->
+
+            <!--spinner/loader to show component rendering or apex action-->
+            <template if:true={showSpinner}>
+                <lightning-spinner alternative-text="Loading....." size="small"></lightning-spinner>            
+            </template>
+        </lightning-card>
+    </div>  
+</template>
